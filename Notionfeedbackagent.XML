@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Description>노션 피드백요청 체크박스 감지 후 템플릿 변환 + 교수님 AI 피드백 자동 생성</Description>
+    <URI>\NotionFeedbackAgent</URI>
+  </RegistrationInfo>
+  <Triggers>
+    <LogonTrigger>
+      <Enabled>true</Enabled>
+    </LogonTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <LogonType>InteractiveToken</LogonType>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <ExecutionTimeLimit>PT0S</ExecutionTimeLimit>
+    <Priority>7</Priority>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>cmd.exe</Command>
+      <Arguments>/c "chcp 65001 &gt; nul &amp;&amp; cd /d C:\dev\GCS_API &amp;&amp; python C:\dev\GCS_API\main.py --interval 30 &gt;&gt; C:\dev\GCS_API\main.log 2&gt;&amp;1"</Arguments>
+      <WorkingDirectory>C:\dev\GCS_API</WorkingDirectory>
+    </Exec>
+  </Actions>
+</Task>
